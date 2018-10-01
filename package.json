@@ -1,0 +1,26 @@
+{
+  "name": "vuetiful-online-store-backend",
+  "version": "1.0.0",
+  "description": "Node.js backend for vuetiful-online-store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadimkorr/vuetiful-online-store-backend.git"
+  },
+  "keywords": [
+    "node.js",
+    "backend"
+  ],
+  "author": "Vadim Korr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vadimkorr/vuetiful-online-store-backend/issues"
+  },
+  "homepage": "https://github.com/vadimkorr/vuetiful-online-store-backend#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
