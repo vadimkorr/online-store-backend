@@ -2,10 +2,11 @@ function getProducts() {
   return 'Hello, World';
 }
 
-module.exports = {
-  getProducts: getProducts
-};
+function getProduct(id) {
+  return 'Product';
+}
 
 module.exports = {
-  getProducts: getProducts
+  getProducts: getProducts,
+  getProduct: getProduct
 };
