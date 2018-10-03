@@ -1,0 +1,23 @@
+{
+  "swaggerDefinition": {
+    "info": {
+      "description": "Vuetiful online store backend",
+      "title": "Swagger",
+      "version": "1.0.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/v1",
+    "produces": ["application/json"],
+    "schemes": ["http"],
+    "securityDefinitions": {
+      "JWT": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": ""
+      }
+    }
+  },
+  "basedir": "./",
+  "files": ["./src/**/*.js"]
+}

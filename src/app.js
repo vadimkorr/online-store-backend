@@ -11,7 +11,7 @@ _dbService.initDb(_consts.server.DB_PATH);
 // app.use(bodyParser.json());
 
 /* Products API */
-app.get('/api/products', _productsController.getProducts);
-app.get('/api/products/:id', _productsController.getProduct);
+app.get('/api/v1/products', _productsController.getProducts);
+app.get('/api/v1/products/:id', _productsController.getProduct);
 
 module.exports = app;
