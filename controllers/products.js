@@ -1,20 +1,19 @@
-const productsService = require('../services').productsService;
+const productsService = require('../components/products/services/products.service');
 
 function getProducts(req, res) {
   let start = req.query.start || 1;
   let count = req.query.count || 10;
-
-  console.log(req.query, productsService.getProducts(start, count));
+  var products = productsService.getProducts(start, count);
   res.json({
-    value: 'Get Products'
+    value: products
   });
 }
 
 function getProduct(req, res) {
   let id = req.params.id;
-  console.log(req.params, productsService.getProduct(id));
+  var prod = productsService.getProduct(id);
   res.json({
-    value: 'Hello'
+    value: prod
   });
 }
 

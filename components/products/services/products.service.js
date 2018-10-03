@@ -1,9 +1,11 @@
-function getProducts() {
-  return 'Hello, World';
+const _productsDal = require('../dal/products.dal');
+
+function getProducts(start, count) {
+  return _productsDal.getProducts(start, count);
 }
 
 function getProduct(id) {
-  return 'Product';
+  return _productsDal.getProductById(id);
 }
 
 module.exports = {
