@@ -1,4 +1,4 @@
-const _productsDal = require('../dal/products.dal');
+const _productsDal = require('@products/dal/products.dal');
 
 function getProducts(start, count) {
   return _productsDal.getProducts(start, count);

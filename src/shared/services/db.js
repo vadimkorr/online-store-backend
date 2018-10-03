@@ -1,6 +1,6 @@
 const loki = require('lokijs');
 
-const _consts = require('../consts');
+const _consts = require('@shared-consts');
 
 let _db;
 

@@ -1,4 +1,4 @@
-const productsService = require('../components/products/services/products.service');
+const productsService = require('@products/services/products.service');
 
 function getProducts(req, res) {
   let start = req.query.start || 1;

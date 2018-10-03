@@ -1,7 +1,9 @@
+require('module-alias/register');
+
 const http = require('http');
 
-const app = require('./app');
-const consts = require('./shared/consts');
+const app = require('./src/app');
+const consts = require('@shared-consts');
 
 const port = process.env.PORT || consts.server.PORT; // normalizePort(process.env.PORT || PORT);
 app.set('port', port);
