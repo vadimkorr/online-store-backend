@@ -1,9 +1,9 @@
 const http = require('http');
 
 const app = require('./app');
-const consts = require('./shared').consts;
+const consts = require('./shared/consts');
 
-const port = process.env.PORT || consts.PORT; // normalizePort(process.env.PORT || PORT);
+const port = process.env.PORT || consts.server.PORT; // normalizePort(process.env.PORT || PORT);
 app.set('port', port);
 
 const server = http.createServer(app);
