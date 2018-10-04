@@ -1,6 +1,8 @@
 #test db
 
 db/*.json
+products/*
+!products/README.md
 
 # Logs
 logs

@@ -24,7 +24,9 @@
   "dependencies": {
     "express": "^4.16.3",
     "lokijs": "^1.5.5",
+    "mime": "^2.3.1",
     "module-alias": "^2.1.0",
+    "multer": "^1.4.0",
     "rc": "^1.2.8"
   },
   "_moduleAliases": {

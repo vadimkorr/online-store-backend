@@ -13,7 +13,12 @@ function getProducts(start, count) {
   );
 }
 
+function addProduct(prod) {
+  _dbService.insert(_consts.collectionNames.PRODUCTS_COLL_NAME, prod);
+}
+
 module.exports = {
   getProductById: getProductById,
-  getProducts: getProducts
+  getProducts: getProducts,
+  addProduct: addProduct
 };

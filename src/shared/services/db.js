@@ -28,7 +28,7 @@ function saveDb() {
 }
 
 function getById(collName, id) {
-  return _db.getCollection(collName).findOne({ id: id });
+  return _db.getCollection(collName).get(id);
 }
 
 function getRange(collName, start, count) {
@@ -40,9 +40,14 @@ function getRange(collName, start, count) {
     .data();
 }
 
+function insert(collName, item) {
+  _db.getCollection(collName).insert(item);
+}
+
 module.exports = {
   initDb: initDb,
   saveDb: saveDb,
   getById: getById,
-  getRange: getRange
+  getRange: getRange,
+  insert: insert
 };

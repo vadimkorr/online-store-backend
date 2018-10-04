@@ -8,7 +8,12 @@ function getProduct(id) {
   return _productsDal.getProductById(id);
 }
 
+function addProduct(prod) {
+  return _productsDal.addProduct(prod);
+}
+
 module.exports = {
   getProducts: getProducts,
-  getProduct: getProduct
+  getProduct: getProduct,
+  addProduct: addProduct
 };
