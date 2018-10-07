@@ -17,8 +17,13 @@ function addProduct(prod) {
   _dbService.insert(_consts.collectionNames.PRODUCTS_COLL_NAME, prod);
 }
 
+function updateProduct(prod) {
+  _dbService.update(_consts.collectionNames.PRODUCTS_COLL_NAME, prod.id, prod);
+}
+
 module.exports = {
   getProductById: getProductById,
   getProducts: getProducts,
-  addProduct: addProduct
+  addProduct: addProduct,
+  updateProduct: updateProduct
 };

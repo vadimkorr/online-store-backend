@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express.Router();
 const productsService = require('@products/services/products.service');
 
 function getImageUrl(host, imageName) {
@@ -12,7 +14,7 @@ function getImageUrl(host, imageName) {
  * @returns {object} 200 - An array of product info
  * @returns {Error}  default - Unexpected error
  */
-function getProducts(req, res) {
+router.get('/', (req, res) => {
   let start = req.query.start || 1;
   let count = req.query.count || 10;
   var products = productsService.getProducts(start, count).map(p => ({
@@ -22,7 +24,7 @@ function getProducts(req, res) {
     image: getImageUrl(req.headers.host, p.img)
   }));
   res.json(products);
-}
+});
 
 /**
  * @route GET /products/:id
@@ -30,26 +32,13 @@ function getProducts(req, res) {
  * @returns {object} 200 - An array of product info
  * @returns {Error}  default - Unexpected error
  */
-function getProduct(req, res) {
+router.get('/:id', (req, res) => {
   let id = req.params.id;
   var prod = productsService.getProduct(id);
   res.json({
     name: prod.name,
     image: getImageUrl(req.headers.host, prod.img)
   });
-}
+});
 
-function addProduct(req, res) {
-  productsService.addProduct({
-    name: req.body.name,
-    price: req.body.price,
-    img: req.file.filename
-  });
-  res.json({});
-}
-
-module.exports = {
-  getProducts: getProducts,
-  getProduct: getProduct,
-  addProduct: addProduct
-};
+module.exports = router;

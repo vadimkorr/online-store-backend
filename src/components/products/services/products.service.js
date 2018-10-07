@@ -12,8 +12,13 @@ function addProduct(prod) {
   return _productsDal.addProduct(prod);
 }
 
+function updateProduct(prod) {
+  return _productsDal.updateProduct(prod);
+}
+
 module.exports = {
   getProducts: getProducts,
   getProduct: getProduct,
-  addProduct: addProduct
+  addProduct: addProduct,
+  updateProduct: updateProduct
 };

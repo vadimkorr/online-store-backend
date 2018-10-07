@@ -23,7 +23,7 @@ function initDb(path) {
   });
 }
 
-function saveDb() {
+function _saveDb() {
   _db.saveDatabase();
 }
 
@@ -42,12 +42,23 @@ function getRange(collName, start, count) {
 
 function insert(collName, item) {
   _db.getCollection(collName).insert(item);
+  _saveDb();
+}
+
+function update(collName, itemId, item) {
+  let itemToUpdate = _db.getCollection(collName).get(itemId);
+  let { id, ...rest } = item;
+  _db.getCollection(collName).update({
+    ...itemToUpdate,
+    ...rest
+  });
+  _saveDb();
 }
 
 module.exports = {
   initDb: initDb,
-  saveDb: saveDb,
   getById: getById,
   getRange: getRange,
-  insert: insert
+  insert: insert,
+  update: update
 };
