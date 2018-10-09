@@ -1,19 +1,37 @@
 const express = require('express');
 const router = express.Router();
-const productsService = require('@products/services/products.service');
+const productsService = require('@products').productsService;
+const crypto = require('crypto');
+const mime = require('mime');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './products/');
+  },
+  filename: (req, file, cb) => {
+    crypto.pseudoRandomBytes(16, (err, raw) => {
+      if (err) return cb(err);
+      cb(null, `${raw.toString('hex')}.${mime.getExtension(file.mimetype)}`);
+    });
+  }
+});
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 2, // bytes, 2MB
+    files: 1
+  },
+  fileFilter: (req, file, cb) => {
+    file.mimetype === 'image/jpeg' ? cb(null, true) : cb(null, false);
+  }
+});
 
 function getImageUrl(host, imageName) {
   return `${host}/products/${imageName}`;
 }
 
-/**
- * @route GET /products
- * @group products - Operations about products
- * @param {string} start.query - start from
- * @param {string} count.query - number of results
- * @returns {object} 200 - An array of product info
- * @returns {Error}  default - Unexpected error
- */
+// get products
 router.get('/', (req, res) => {
   let start = req.query.start || 1;
   let count = req.query.count || 10;
@@ -26,12 +44,7 @@ router.get('/', (req, res) => {
   res.json(products);
 });
 
-/**
- * @route GET /products/:id
- * @group products - Operations about products
- * @returns {object} 200 - An array of product info
- * @returns {Error}  default - Unexpected error
- */
+// get product
 router.get('/:id', (req, res) => {
   let id = req.params.id;
   var prod = productsService.getProduct(id);
@@ -39,6 +52,33 @@ router.get('/:id', (req, res) => {
     name: prod.name,
     image: getImageUrl(req.headers.host, prod.img)
   });
+});
+
+// add product
+router.post('/', upload.single('image'), (req, res) => {
+  productsService.addProduct({
+    name: req.body.name,
+    price: req.body.price,
+    img: req.file.filename
+  });
+  res.json({});
+});
+
+// update product
+router.post('/:id', upload.single('image'), (req, res) => {
+  productsService.updateProduct({
+    id: req.params.id,
+    name: req.body.name,
+    price: req.body.price,
+    img: req.file ? req.file.filename : undefined
+  });
+  res.json({});
+});
+
+// remove product
+router.delete('/:id', (req, res) => {
+  // isActive: false
+  res.json({});
 });
 
 module.exports = router;

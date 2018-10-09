@@ -34,7 +34,8 @@
     "@controllers": "src/controllers",
     "@shared-services": "src/shared/services",
     "@shared-consts": "src/shared/consts",
-    "@products": "src/components/products"
+    "@products": "src/components/products",
+    "@orders": "src/components/orders"
   },
   "devDependencies": {
     "express-swagger-generator": "^1.1.9"

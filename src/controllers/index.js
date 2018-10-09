@@ -1,7 +1,7 @@
 const products = require('./products');
-const admin = require('./admin');
+const orders = require('./orders');
 
 module.exports = {
   products: products,
-  admin: admin
+  orders: orders
 };
