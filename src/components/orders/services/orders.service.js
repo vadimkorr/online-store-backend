@@ -12,12 +12,20 @@ function addOrder(order) {
   return ordersDal.addOrder(order);
 }
 
-function removeOrder(orderId) {
-  return ordersDal.updateOrderStatus(orderId, 'removed');
+function removeOrder(id) {
+  let orderToUpdate = ordersDal.getOrderById(id);
+  return ordersDal.updateOrder({
+    ...orderToUpdate,
+    status: 'removed'
+  });
 }
 
-function updateOrderStatus(orderId, status) {
-  return ordersDal.updateOrderStatus(orderId, status);
+function updateOrderStatus(id, status) {
+  let orderToUpdate = ordersDal.getOrderById(id);
+  return ordersDal.updateOrder({
+    ...orderToUpdate,
+    status: status
+  });
 }
 
 module.exports = {
