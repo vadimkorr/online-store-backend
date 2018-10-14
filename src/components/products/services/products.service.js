@@ -13,12 +13,23 @@ function addProduct(prod) {
 }
 
 function updateProduct(prod) {
-  return _productsDal.updateProduct(prod);
+  let productToUpdate = _productsDal.getProductById(prod.id);
+  let { id, ...rest } = prod;
+  return _productsDal.updateProduct({
+    ...productToUpdate,
+    ...rest
+  });
+}
+
+function removeProduct(id) {
+  let productToRemove = _productsDal.getProductById(id);
+  _productsDal.removeProduct(productToRemove);
 }
 
 module.exports = {
   getProducts: getProducts,
   getProduct: getProduct,
   addProduct: addProduct,
-  updateProduct: updateProduct
+  updateProduct: updateProduct,
+  removeProduct: removeProduct
 };

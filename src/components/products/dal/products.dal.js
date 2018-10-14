@@ -18,12 +18,17 @@ function addProduct(prod) {
 }
 
 function updateProduct(prod) {
-  _dbService.update(_consts.collectionNames.PRODUCTS_COLL_NAME, prod.id, prod);
+  _dbService.update(_consts.collectionNames.PRODUCTS_COLL_NAME, prod);
+}
+
+function removeProduct(prod) {
+  _dbService.remove(_consts.collectionNames.PRODUCTS_COLL_NAME, prod);
 }
 
 module.exports = {
   getProductById: getProductById,
   getProducts: getProducts,
   addProduct: addProduct,
-  updateProduct: updateProduct
+  updateProduct: updateProduct,
+  removeProduct: removeProduct
 };

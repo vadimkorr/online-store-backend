@@ -77,7 +77,7 @@ router.post('/:id', upload.single('image'), (req, res) => {
 
 // remove product
 router.delete('/:id', (req, res) => {
-  // isActive: false
+  productsService.removeProduct(req.params.id);
   res.json({});
 });
 

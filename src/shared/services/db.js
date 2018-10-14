@@ -45,14 +45,13 @@ function insert(collName, item) {
   _saveDb();
 }
 
-function update(collName, itemId, item) {
-  let itemToUpdate = _db.getCollection(collName).get(itemId);
-  let { id, ...rest } = item;
-  _db.getCollection(collName).update({
-    ...itemToUpdate,
-    ...rest
-  });
+function update(collName, item) {
+  _db.getCollection(collName).update(item);
   _saveDb();
+}
+
+function remove(collName, item) {
+  _db.getCollection(collName).remove(item);
 }
 
 module.exports = {
@@ -60,5 +59,6 @@ module.exports = {
   getById: getById,
   getRange: getRange,
   insert: insert,
-  update: update
+  update: update,
+  remove: remove
 };
