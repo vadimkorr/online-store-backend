@@ -12,26 +12,21 @@ function addOrder(order) {
   return ordersDal.addOrder(order);
 }
 
-function removeOrder(id) {
-  let orderToUpdate = ordersDal.getOrderById(id);
-  return ordersDal.updateOrder({
-    ...orderToUpdate,
-    status: 'removed'
-  });
-}
-
 function updateOrderStatus(id, status) {
   let orderToUpdate = ordersDal.getOrderById(id);
-  return ordersDal.updateOrder({
-    ...orderToUpdate,
-    status: status
-  });
+  if (orderToUpdate) {
+    return ordersDal.updateOrder({
+      ...orderToUpdate,
+      status: status
+    });
+  } else {
+    return new Error('Order not found');
+  }
 }
 
 module.exports = {
   getOrders: getOrders,
   getOrder: getOrder,
   addOrder: addOrder,
-  removeOrder: removeOrder,
   updateOrderStatus: updateOrderStatus
 };

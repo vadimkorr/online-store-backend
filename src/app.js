@@ -1,19 +1,18 @@
+require('module-alias/register');
 const express = require('express');
-const bodyParser = require('body-parser');
-
-const dbService = require('./shared/services/db');
-const consts = require('./shared/consts');
-const productsController = require('@controllers').products;
-const ordersController = require('@controllers').orders;
-
+const http = require('http');
 const app = express();
-app.use(bodyParser.json());
+const loggerService = require('@shared-services').loggerService;
 
-dbService.initDb(consts.server.DB_PATH);
+const consts = require('@shared-consts');
+const port = process.env.PORT || consts.server.PORT;
 
-app.use('/products', express.static('products'));
+require('./startup/routes')(app);
+require('./startup/db')();
+require('./startup/logging')();
+require('./startup/swagger')(app);
 
-app.use('/api/v1/products', productsController);
-app.use('/api/v1/orders', ordersController);
-
-module.exports = app;
+const server = http.createServer(app);
+server.listen(port, () => {
+  loggerService.info(`Server listening on port ${port}`);
+});
