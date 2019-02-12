@@ -9,6 +9,10 @@ function getOrders(start, count) {
   );
 }
 
+function getOrdersCount() {
+  return dbService.count(consts.collectionNames.ORDERS_COLL_NAME);
+}
+
 function getOrderById(id) {
   return dbService.getById(consts.collectionNames.ORDERS_COLL_NAME, id);
 }
@@ -25,5 +29,6 @@ module.exports = {
   getOrders: getOrders,
   getOrderById: getOrderById,
   addOrder: addOrder,
-  updateOrder: updateOrder
+  updateOrder: updateOrder,
+  getOrdersCount: getOrdersCount
 };

@@ -14,7 +14,8 @@ router.get(
       status: o.status,
       items: o.items
     }));
-    res.json(items);
+    const pages = Math.ceil(ordersService.getOrdersCount() / count);
+    res.json({items, pages});
   })
 );
 
