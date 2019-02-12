@@ -29,7 +29,7 @@ const upload = multer({
 });
 
 function getImageUrl(host, imageName) {
-  return `${host}/products/${imageName}`;
+  return `http://${host}/products/${imageName}`;
 }
 
 // get products
