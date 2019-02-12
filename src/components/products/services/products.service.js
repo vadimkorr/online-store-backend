@@ -4,6 +4,10 @@ function getProducts(start, count) {
   return _productsDal.getProducts(start, count);
 }
 
+function getProductsCount() {
+  return _productsDal.getProductsCount();
+}
+
 function getProduct(id) {
   return _productsDal.getProductById(id);
 }
@@ -31,5 +35,6 @@ module.exports = {
   getProduct: getProduct,
   addProduct: addProduct,
   updateProduct: updateProduct,
-  removeProduct: removeProduct
+  removeProduct: removeProduct,
+  getProductsCount: getProductsCount
 };

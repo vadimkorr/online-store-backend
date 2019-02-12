@@ -44,7 +44,8 @@ router.get(
       price: p.price,
       image: getImageUrl(req.headers.host, p.img)
     }));
-    res.json(products);
+    const pages = Math.ceil(productsService.getProductsCount() / count);
+    res.json({products, pages });
   })
 );
 

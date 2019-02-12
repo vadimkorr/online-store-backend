@@ -13,6 +13,10 @@ function getProducts(start, count) {
   );
 }
 
+function getProductsCount() {
+  return _dbService.count(_consts.collectionNames.PRODUCTS_COLL_NAME);
+}
+
 function addProduct(prod) {
   _dbService.insert(_consts.collectionNames.PRODUCTS_COLL_NAME, prod);
 }
@@ -30,5 +34,6 @@ module.exports = {
   getProducts: getProducts,
   addProduct: addProduct,
   updateProduct: updateProduct,
-  removeProduct: removeProduct
+  removeProduct: removeProduct,
+  getProductsCount: getProductsCount
 };

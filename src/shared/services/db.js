@@ -31,6 +31,10 @@ function getById(collName, id) {
   return _db.getCollection(collName).get(id);
 }
 
+function count(collName) {
+  return _db.getCollection(collName).count();
+}
+
 function getRange(collName, start, count) {
   return _db
     .getCollection(collName)
@@ -60,5 +64,6 @@ module.exports = {
   getRange: getRange,
   insert: insert,
   update: update,
-  remove: remove
+  remove: remove,
+  count: count,
 };
