@@ -1,12 +1,32 @@
 const dbService = require('@shared-services/db');
 const consts = require('@shared-consts');
+const productsDal = require('@products/dal/products.dal');
 
 function getOrders(start, count) {
   return dbService.getRange(
     consts.collectionNames.ORDERS_COLL_NAME,
     start,
     count
-  );
+  ).map(item => {
+    let items = item.items.map(ei => {
+      let product = productsDal.getProductById(ei.id);
+      return ({
+        product: {
+          id: product['$loki'],
+          img: product.img,
+          name: product.name,
+          price: product.price
+        },
+        count: ei.count
+      });
+    });
+    let extendedItem = {
+      ...item,
+      items: items
+    }
+    console.log(extendedItem);
+    return extendedItem;
+  });
 }
 
 function getOrdersCount() {

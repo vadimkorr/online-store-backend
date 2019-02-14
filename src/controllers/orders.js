@@ -11,11 +11,12 @@ router.get(
     let count = req.query.count || 10;
     var items = ordersService.getOrders(start, count).map(o => ({
       id: o['$loki'],
+      createdAt: o.createdAt,
       status: o.status,
       items: o.items
     }));
-    const pages = Math.ceil(ordersService.getOrdersCount() / count);
-    res.json({items, pages});
+    const totalItems = ordersService.getOrdersCount();
+    res.json({items, totalItems});
   })
 );
 
@@ -40,7 +41,8 @@ router.post(
     ordersService.addOrder({
       userId: 'userId',
       items: req.body.items,
-      status: req.body.status
+      status: req.body.status,
+      createdAt: Date.now()
     });
     res.json({});
   })
