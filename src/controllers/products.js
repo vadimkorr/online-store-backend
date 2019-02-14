@@ -56,6 +56,8 @@ router.get(
     let id = req.params.id;
     var prod = productsService.getProduct(id);
     res.json({
+      id: id,
+      price: prod.price,
       name: prod.name,
       image: getImageUrl(req.headers.host, prod.img)
     });
@@ -81,12 +83,20 @@ router.post(
   '/:id',
   upload.single('image'),
   withErrorHandling((req, res) => {
-    productsService.updateProduct({
-      id: req.params.id,
-      name: req.body.name,
-      price: req.body.price,
-      img: req.file ? req.file.filename : undefined
-    });
+    if (req.file) {
+      productsService.updateProductWithImage({
+        id: req.params.id,
+        name: req.body.name,
+        price: req.body.price,
+        img: req.file.filename
+      });
+    } else {
+      productsService.updateProduct({
+        id: req.params.id,
+        name: req.body.name,
+        price: req.body.price
+      });
+    }
     res.json({});
   })
 );

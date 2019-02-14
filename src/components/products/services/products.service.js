@@ -18,6 +18,15 @@ function addProduct(prod) {
 
 function updateProduct(prod) {
   let productToUpdate = _productsDal.getProductById(prod.id);
+  let { id, img, ...rest } = prod;
+  return _productsDal.updateProduct({
+    ...productToUpdate,
+    ...rest
+  });
+}
+
+function updateProductWithImage(prod) {
+  let productToUpdate = _productsDal.getProductById(prod.id);
   let { id, ...rest } = prod;
   return _productsDal.updateProduct({
     ...productToUpdate,
@@ -35,6 +44,7 @@ module.exports = {
   getProduct: getProduct,
   addProduct: addProduct,
   updateProduct: updateProduct,
+  updateProductWithImage: updateProductWithImage,
   removeProduct: removeProduct,
   getProductsCount: getProductsCount
 };
