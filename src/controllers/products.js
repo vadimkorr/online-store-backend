@@ -71,7 +71,7 @@ router.post(
   withErrorHandling((req, res) => {
     productsService.addProduct({
       name: req.body.name,
-      price: req.body.price,
+      price: parseFloat(req.body.price),
       img: req.file.filename
     });
     res.json({});
@@ -87,14 +87,14 @@ router.post(
       productsService.updateProductWithImage({
         id: req.params.id,
         name: req.body.name,
-        price: req.body.price,
+        price: parseFloat(req.body.price),
         img: req.file.filename
       });
     } else {
       productsService.updateProduct({
         id: req.params.id,
         name: req.body.name,
-        price: req.body.price
+        price: parseFloat(req.body.price)
       });
     }
     res.json({});

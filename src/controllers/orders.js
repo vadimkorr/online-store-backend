@@ -41,7 +41,7 @@ router.post(
     ordersService.addOrder({
       userId: 'userId',
       items: req.body.items,
-      status: req.body.status,
+      status: 'created',
       createdAt: Date.now()
     });
     res.json({});

@@ -38,7 +38,20 @@ function getOrderById(id) {
 }
 
 function addOrder(order) {
-  dbService.insert(consts.collectionNames.ORDERS_COLL_NAME, order);
+  let items = order.items.map(oi => {
+    let orderItem = productsDal.getProductById(oi.id);
+    return ({
+      ...oi,
+      price: orderItem.price
+    });
+  });
+  let extendedOrder = {
+    ...order,
+    items
+  }
+  console.log(extendedOrder);
+
+  dbService.insert(consts.collectionNames.ORDERS_COLL_NAME, extendedOrder);
 }
 
 function updateOrder(order) {
