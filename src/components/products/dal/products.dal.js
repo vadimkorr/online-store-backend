@@ -1,5 +1,5 @@
-const _dbService = require('@shared-services/db');
-const _consts = require('@shared-consts');
+const _dbService = require('@services').dbService;
+const _consts = require('@consts');
 
 function getProductById(id) {
   return _dbService.getById(_consts.collectionNames.PRODUCTS_COLL_NAME, id);

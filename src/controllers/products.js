@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const withErrorHandling = require('@middleware').withErrorHandling;
 const productsService = require('@products').productsService;
+const pathService = require('@services').pathService;
 const crypto = require('crypto');
 const mime = require('mime');
 const multer = require('multer');
@@ -28,10 +29,6 @@ const upload = multer({
   }
 });
 
-function getImageUrl(host, imageName) {
-  return `http://${host}/products/${imageName}`;
-}
-
 // get products
 router.get(
   '/',
@@ -42,7 +39,7 @@ router.get(
       id: p['$loki'],
       name: p.name,
       price: p.price,
-      image: getImageUrl(req.headers.host, p.img)
+      image: pathService.getImageUrl(p.img)
     }));
     const pages = Math.ceil(productsService.getProductsCount() / count);
     res.json({products, pages });
@@ -59,7 +56,7 @@ router.get(
       id: id,
       price: prod.price,
       name: prod.name,
-      image: getImageUrl(req.headers.host, prod.img)
+      image: pathService.getImageUrl(prod.img)
     });
   })
 );

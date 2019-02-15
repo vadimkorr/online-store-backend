@@ -2,9 +2,9 @@ require('module-alias/register');
 const express = require('express');
 const http = require('http');
 const app = express();
-const loggerService = require('@shared-services').loggerService;
+const loggerService = require('@services').loggerService;
 
-const consts = require('@shared-consts');
+const consts = require('@consts');
 const port = process.env.PORT || consts.server.PORT;
 
 app.use((req, res, next) => {

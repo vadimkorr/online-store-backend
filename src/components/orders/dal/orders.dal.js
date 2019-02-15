@@ -1,6 +1,7 @@
-const dbService = require('@shared-services/db');
-const consts = require('@shared-consts');
+const dbService = require('@services/db');
+const consts = require('@consts');
 const productsDal = require('@products/dal/products.dal');
+const pathService = require('@services').pathService;
 
 function getOrders(start, count) {
   return dbService.getRange(
@@ -13,7 +14,7 @@ function getOrders(start, count) {
       return ({
         product: {
           id: product['$loki'],
-          img: product.img,
+          img: pathService.getImageUrl(product.img),
           name: product.name,
           price: product.price
         },

@@ -34,8 +34,8 @@
   "_moduleAliases": {
     "@root": ".",
     "@controllers": "src/controllers",
-    "@shared-services": "src/shared/services",
-    "@shared-consts": "src/shared/consts",
+    "@services": "src/services",
+    "@consts": "src/consts",
     "@products": "src/components/products",
     "@orders": "src/components/orders",
     "@middleware": "src/middleware"

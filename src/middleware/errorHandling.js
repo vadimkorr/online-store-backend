@@ -1,4 +1,4 @@
-const loggerService = require('@shared-services').loggerService;
+const loggerService = require('@services').loggerService;
 
 function withErrorHandling(handler) {
   return (req, res, next) => {
