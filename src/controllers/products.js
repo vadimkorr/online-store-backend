@@ -36,7 +36,6 @@ router.get(
   '/',
   auth.withAuth(),
   withErrorHandling((req, res) => {
-    console.log('REQ', req.user);
     let start = req.query.start || 1;
     let count = req.query.count || 10;
     var products = productsService.getProducts(start, count).map(p => ({

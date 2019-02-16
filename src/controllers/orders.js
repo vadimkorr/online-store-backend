@@ -4,14 +4,38 @@ const router = express.Router();
 const ordersService = require('@orders').ordersService;
 const auth = require('@middleware').auth;
 const rolesConsts = require('@consts').roles;
+const statusesConsts = require('@consts').statuses;
 
 // get orders
 router.get(
-  '/',
+  '/all',
+  auth.withAuth(),
+  auth.withRole(rolesConsts.ADMIN),
   withErrorHandling((req, res) => {
     let start = req.query.start || 1;
     let count = req.query.count || 10;
     var items = ordersService.getOrders(start, count).map(o => ({
+      id: o['$loki'],
+      userId: o.userId,
+      createdAt: o.createdAt,
+      status: o.status,
+      items: o.items
+    }));
+    const totalItems = ordersService.getOrdersCount();
+    res.json({items, totalItems});
+  })
+);
+
+// get orders of user
+router.get(
+  '/',
+  auth.withAuth(),
+  auth.withRole(rolesConsts.USER),
+  withErrorHandling((req, res) => {
+    const user = req.user;
+    let start = req.query.start || 1;
+    let count = req.query.count || 10;
+    var items = ordersService.getOrdersByUserId(user.id, start, count).map(o => ({
       id: o['$loki'],
       createdAt: o.createdAt,
       status: o.status,
@@ -25,6 +49,7 @@ router.get(
 // get order
 router.get(
   '/:id',
+  auth.withAuth(),
   withErrorHandling((req, res) => {
     let id = req.params.id;
     var item = ordersService.getOrder(id);
@@ -39,11 +64,14 @@ router.get(
 // create order with user id
 router.post(
   '/',
+  auth.withAuth(),
+  auth.withRole(rolesConsts.USER),
   withErrorHandling((req, res) => {
+    const user = req.user;
     ordersService.addOrder({
-      userId: 'userId',
+      userId: user.id,
       items: req.body.items,
-      status: 'created',
+      status: statusesConsts['Created'],
       createdAt: Date.now()
     });
     res.json({});

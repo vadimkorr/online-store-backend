@@ -25,7 +25,34 @@ function getOrders(start, count) {
       ...item,
       items: items
     }
-    console.log(extendedItem);
+    return extendedItem;
+  });
+}
+
+function getOrdersByUserId(userId, start, count) {
+  return dbService.getRangeBy(
+    consts.collectionNames.ORDERS_COLL_NAME,
+    'userId',
+    userId,
+    start,
+    count
+  ).map(item => {
+    let items = item.items.map(ei => {
+      let product = productsDal.getProductById(ei.id);
+      return ({
+        product: {
+          id: product['$loki'],
+          img: pathService.getImageUrl(product.img),
+          name: product.name,
+          price: product.price
+        },
+        count: ei.count
+      });
+    });
+    let extendedItem = {
+      ...item,
+      items: items
+    }
     return extendedItem;
   });
 }
@@ -50,8 +77,6 @@ function addOrder(order) {
     ...order,
     items
   }
-  console.log(extendedOrder);
-
   dbService.insert(consts.collectionNames.ORDERS_COLL_NAME, extendedOrder);
 }
 
@@ -64,5 +89,6 @@ module.exports = {
   getOrderById: getOrderById,
   addOrder: addOrder,
   updateOrder: updateOrder,
-  getOrdersCount: getOrdersCount
+  getOrdersCount: getOrdersCount,
+  getOrdersByUserId: getOrdersByUserId
 };

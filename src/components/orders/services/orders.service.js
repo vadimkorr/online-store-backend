@@ -4,6 +4,10 @@ function getOrders(start, count) {
   return ordersDal.getOrders(start, count);
 }
 
+function getOrdersByUserId(userId, start, count) {
+  return ordersDal.getOrdersByUserId(userId, start, count);
+}
+
 function getOrdersCount() {
   return ordersDal.getOrdersCount();
 }
@@ -33,5 +37,6 @@ module.exports = {
   getOrder: getOrder,
   addOrder: addOrder,
   updateOrderStatus: updateOrderStatus,
-  getOrdersCount: getOrdersCount
+  getOrdersCount: getOrdersCount,
+  getOrdersByUserId: getOrdersByUserId
 };

@@ -44,6 +44,16 @@ function getRange(collName, start, count) {
     .data();
 }
 
+function getRangeBy(collName, by, value, start, count) {
+  return _db
+    .getCollection(collName)
+    .chain()
+    .find({ [by]: value })
+    .offset(start)
+    .limit(count)
+    .data();
+}
+
 function insert(collName, item) {
   _db.getCollection(collName).insert(item);
   _saveDb();
@@ -71,4 +81,5 @@ module.exports = {
   remove: remove,
   findBy: findBy,
   count: count,
+  getRangeBy: getRangeBy
 };

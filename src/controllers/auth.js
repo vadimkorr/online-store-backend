@@ -39,6 +39,7 @@ router.post('/login', (req, res) => {
       // This is what ends up in our JWT
       const payload = {
         username: user.login,
+        id: user['$loki'],
         role: user.role,
         expires: Date.now() + parseInt(appConsts.JWT_EXPIRATION_MS),
       };
