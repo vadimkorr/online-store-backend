@@ -58,6 +58,10 @@ function remove(collName, item) {
   _db.getCollection(collName).remove(item);
 }
 
+function findBy(collName, by, value) {
+  return _db.getCollection(collName).find({[by]: value});
+}
+
 module.exports = {
   initDb: initDb,
   getById: getById,
@@ -65,5 +69,6 @@ module.exports = {
   insert: insert,
   update: update,
   remove: remove,
+  findBy: findBy,
   count: count,
 };

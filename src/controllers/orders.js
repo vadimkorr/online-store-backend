@@ -2,6 +2,8 @@ const express = require('express');
 const withErrorHandling = require('@middleware').withErrorHandling;
 const router = express.Router();
 const ordersService = require('@orders').ordersService;
+const auth = require('@middleware').auth;
+const rolesConsts = require('@consts').roles;
 
 // get orders
 router.get(
@@ -51,6 +53,8 @@ router.post(
 // change status
 router.post(
   '/:id',
+  auth.withAuth(),
+  auth.withRole(rolesConsts.ADMIN),
   withErrorHandling((req, res) => {
     const result = ordersService.updateOrderStatus(
       req.params.id,

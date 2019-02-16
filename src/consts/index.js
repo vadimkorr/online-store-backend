@@ -1,7 +1,11 @@
 const collectionNames = require('./collection-names');
 const server = require('./server');
+const app = require('./app');
+const roles = require('./roles');
 
 module.exports = {
-  collectionNames: collectionNames,
-  server: server
+  app,
+  collectionNames,
+  server,
+  roles
 };
