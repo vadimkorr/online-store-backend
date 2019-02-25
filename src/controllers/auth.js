@@ -4,7 +4,7 @@ const usersService = require('@users').usersService;
 const withErrorHandling = require('@middleware').withErrorHandling;
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const appConsts = require('@consts').app;
 const rolesConsts = require('@consts').roles;
 

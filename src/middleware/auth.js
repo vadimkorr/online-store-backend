@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const usersService = require('@users').usersService
 const appConsts = require('@consts').app
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 passport.use(new LocalStrategy({
     usernameField: 'login',
