@@ -4,57 +4,57 @@ const productsDal = require('@products/dal/products.dal');
 const pathService = require('@services').pathService;
 
 function getOrders(start, count) {
-  return dbService.getRange(
-    consts.collectionNames.ORDERS_COLL_NAME,
-    start,
-    count
-  ).map(item => {
-    let items = item.items.map(ei => {
-      let product = productsDal.getProductById(ei.id);
-      return ({
-        product: {
-          id: product['$loki'],
-          img: pathService.getImageUrl(product.img),
-          name: product.name,
-          price: product.price
-        },
-        count: ei.count
+  return dbService
+    .getRange(consts.collectionNames.ORDERS_COLL_NAME, start, count)
+    .map(item => {
+      let items = item.items.map(ei => {
+        let product = productsDal.getProductById(ei.id);
+        return {
+          product: {
+            id: product['$loki'],
+            img: pathService.getImageUrl(product.img),
+            name: product.name,
+            price: product.price
+          },
+          count: ei.count
+        };
       });
+      let extendedItem = {
+        ...item,
+        items: items
+      };
+      return extendedItem;
     });
-    let extendedItem = {
-      ...item,
-      items: items
-    }
-    return extendedItem;
-  });
 }
 
 function getOrdersByUserId(userId, start, count) {
-  return dbService.getRangeBy(
-    consts.collectionNames.ORDERS_COLL_NAME,
-    'userId',
-    userId,
-    start,
-    count
-  ).map(item => {
-    let items = item.items.map(ei => {
-      let product = productsDal.getProductById(ei.id);
-      return ({
-        product: {
-          id: product['$loki'],
-          img: pathService.getImageUrl(product.img),
-          name: product.name,
-          price: product.price
-        },
-        count: ei.count
+  return dbService
+    .getRangeBy(
+      consts.collectionNames.ORDERS_COLL_NAME,
+      'userId',
+      userId,
+      start,
+      count
+    )
+    .map(item => {
+      let items = item.items.map(ei => {
+        let product = productsDal.getProductById(ei.id);
+        return {
+          product: {
+            id: product['$loki'],
+            img: pathService.getImageUrl(product.img),
+            name: product.name,
+            price: product.price
+          },
+          count: ei.count
+        };
       });
+      let extendedItem = {
+        ...item,
+        items: items
+      };
+      return extendedItem;
     });
-    let extendedItem = {
-      ...item,
-      items: items
-    }
-    return extendedItem;
-  });
 }
 
 function getOrdersCount() {
@@ -68,15 +68,15 @@ function getOrderById(id) {
 function addOrder(order) {
   let items = order.items.map(oi => {
     let orderItem = productsDal.getProductById(oi.id);
-    return ({
+    return {
       ...oi,
       price: orderItem.price
-    });
+    };
   });
   let extendedOrder = {
     ...order,
     items
-  }
+  };
   dbService.insert(consts.collectionNames.ORDERS_COLL_NAME, extendedOrder);
 }
 

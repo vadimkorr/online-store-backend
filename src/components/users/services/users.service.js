@@ -5,7 +5,7 @@ function findByLogin(login) {
 }
 
 function saveUser(user) {
-  return usersDal.saveUser(user)
+  return usersDal.saveUser(user);
 }
 
 module.exports = {

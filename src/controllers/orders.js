@@ -22,7 +22,7 @@ router.get(
       items: o.items
     }));
     const totalItems = ordersService.getOrdersCount();
-    res.json({items, totalItems});
+    res.json({ items, totalItems });
   })
 );
 
@@ -35,14 +35,16 @@ router.get(
     const user = req.user;
     let start = req.query.start || 1;
     let count = req.query.count || 10;
-    var items = ordersService.getOrdersByUserId(user.id, start, count).map(o => ({
-      id: o['$loki'],
-      createdAt: o.createdAt,
-      status: o.status,
-      items: o.items
-    }));
+    var items = ordersService
+      .getOrdersByUserId(user.id, start, count)
+      .map(o => ({
+        id: o['$loki'],
+        createdAt: o.createdAt,
+        status: o.status,
+        items: o.items
+      }));
     const totalItems = ordersService.getOrdersCount();
-    res.json({items, totalItems});
+    res.json({ items, totalItems });
   })
 );
 

@@ -69,7 +69,7 @@ function remove(collName, item) {
 }
 
 function findBy(collName, by, value) {
-  return _db.getCollection(collName).find({[by]: value});
+  return _db.getCollection(collName).find({ [by]: value });
 }
 
 module.exports = {
