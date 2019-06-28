@@ -38,14 +38,16 @@ router.get(
   withErrorHandling((req, res) => {
     let start = req.query.start || 1;
     let count = req.query.count || 10;
-    var products = productsService.getProducts(start, count).map(p => ({
+    let items = productsService.getProducts(start, count).map(p => ({
       id: p['$loki'],
       name: p.name,
       price: p.price,
       image: pathService.getImageUrl(p.img)
     }));
-    const pages = Math.ceil(productsService.getProductsCount() / count);
-    res.json({products, pages });
+    const totalItemsCount = Math.ceil(
+      productsService.getProductsCount() / count
+    );
+    res.json({ items, totalItemsCount });
   })
 );
 
