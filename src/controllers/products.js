@@ -44,9 +44,7 @@ router.get(
       price: p.price,
       image: pathService.getImageUrl(p.img)
     }));
-    const totalItemsCount = Math.ceil(
-      productsService.getProductsCount() / count
-    );
+    const totalItemsCount = productsService.getProductsCount();
     res.json({ items, totalItemsCount });
   })
 );
