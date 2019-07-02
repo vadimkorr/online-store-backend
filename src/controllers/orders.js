@@ -21,8 +21,8 @@ router.get(
       status: o.status,
       items: o.items
     }));
-    const totalItems = ordersService.getOrdersCount();
-    res.json({ items, totalItems });
+    const totalItemsCount = ordersService.getOrdersCount();
+    res.json({ items, totalItemsCount });
   })
 );
 
@@ -43,8 +43,8 @@ router.get(
         status: o.status,
         items: o.items
       }));
-    const totalItems = ordersService.getOrdersCount();
-    res.json({ items, totalItems });
+    const totalItemsCount = ordersService.getOrdersCount();
+    res.json({ items, totalItemsCount });
   })
 );
 
@@ -93,7 +93,7 @@ router.post(
     if (result instanceof Error) {
       res.status(404).json({ error: result.message });
     } else {
-      res.sendStatus(200);
+      res.json({});
     }
   })
 );

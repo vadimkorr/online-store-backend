@@ -67,14 +67,17 @@ function getOrderById(id) {
 
 function addOrder(order) {
   let items = order.items.map(oi => {
-    let orderItem = productsDal.getProductById(oi.id);
+    let orderItem = productsDal.getProductById(oi.productId);
     return {
-      ...oi,
+      id: orderItem['$loki'],
+      count: oi.count,
       price: orderItem.price
     };
   });
   let extendedOrder = {
-    ...order,
+    status: order.status,
+    userId: order.userId,
+    createdAt: order.createdAt,
     items
   };
   dbService.insert(consts.collectionNames.ORDERS_COLL_NAME, extendedOrder);
